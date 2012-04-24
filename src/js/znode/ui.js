@@ -105,7 +105,7 @@ $(function(){
 		// go into each file and search for globals
 		var name = $(this).text();
 		//alert(name);
-		jQuery.get("source/" + name + ".js",function(data){
+		jQuery.get("MainMenu/" + name + ".js",function(data){
 			 var indexOfPotVar = new Array();
 			 indexOfPotVar[0] = 0;
 			 var count = 0;
@@ -256,12 +256,12 @@ $(function(){
 	{
 		if(loadedPanel == 0)
 		{
-			$("[id^=srcViewCode]").first().load("source/" + name + ".js");
+			$("[id^=srcViewCode]").first().load("MainMenu/" + name + ".js");
 			loadedPanel = 1;
 		}
 		else
 		{
-			$("[id^=srcViewCode]").last().load("source/" + name + ".js");
+			$("[id^=srcViewCode]").last().load("MainMenu/" + name + ".js");
 			loadedPanel = 0;
 		}
 	}
@@ -274,7 +274,7 @@ $(function(){
 		$("#superClass").empty();
 		$("#superClass").text("SuperClass for " + selectedForInh + ":");
 		
-		jQuery.get("source/" + name + ".js",function(data){
+		jQuery.get("MainMenu/" + name + ".js",function(data){
 		//alert(data);
 		//var superClassName = $('data:contains("prototype = new")');
 		//var superClassName = $(data).search(/prototype = new/);
@@ -314,7 +314,7 @@ $(function(){
 			//returns each name
 			var className = $(this).text();
 			//found = 1;
-			$.get("source/" + className + ".js",function(data){
+			$.get("MainMenu/" + className + ".js",function(data){
 				var indexOfSubClass = data.indexOf("prototype = new " + name);
 				//alert(data);
 				// IF found
