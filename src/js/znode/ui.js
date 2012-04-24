@@ -83,16 +83,8 @@ $(function(){
 	sourceWin.fadeOut();
 	inhWin.fadeOut();
 	glblWin.fadeOut();
-	//var compList;
-	//compList.load("json/sourcefiles.php?"+Math.random()*1000000);//,function(data){
-	//	alert(compList);
-	//});
+	
 	compWin.fadeIn();
-	var temp = $("#glbFiles .srcFile");
-	temp.parent().each(function(){
-		var className = $(this).text();
-		alert(className);
-	});
   });
   $("#globalV").click(function(){
 	openWin.fadeOut();
@@ -155,7 +147,7 @@ $(function(){
 						//alert(temps);
 						if (temps == name)
 						{
-							alert(name);
+							//alert(name);
 							//$(this).add(glbAtrName,document);
 							//$(this).append(glbAtrName);
 							//$(this).append(glbAtrName);
@@ -170,9 +162,10 @@ $(function(){
 						}
 						else
 						{
+							// cant remove here
 							//$(this).remove();
 						}
-						//return ' 4';
+
 					});
 					//jQuery(this).append(glbAtrName);
 					//name.append(glbAtrName);
@@ -194,27 +187,10 @@ $(function(){
 			//var indexOfPotVar = data.indexOf("var");
 			//alert(indexOfFunction);
 			//alert(indexOfPotVar);
-			// IF found variables AND it is before the Function declaration
-			/*if(indexOfPotVar > 0 && indexOfPotVar < indexOfFunction)
-			{
-				// add to tree and eventually delete file name
-				
-				//var superClassName = data.slice(indexOfSuperClass+16,data.length-1);
-				alert("Add to Tree");
-			}
-			else
-			{
-
-			}*/
 		});
 	});
 	
 	glblWin.fadeIn();
-	//alert("HI");
-	//alert(temp.siblings());
-	//alert(glbList.find(".srcFiles").next().text());
-	//alert(glbList.text());
-	//alert(glbList.siblings().text());
   });  
   
   
@@ -276,9 +252,6 @@ $(function(){
   var selectedForInh = 0;
   $(".srcFile").live('click', function() {
     var name = $(this).text();
-	// try to toggle, doesnt load bc there is a next
-	//if($("[id^=srcViewCode]").parent().next().length == 0) {
-	//$("#srcViewCode1").load("source/" + name + ".js");}
 	if ($(this).parent().is('#srcFiles'))
 	{
 		if(loadedPanel == 0)
@@ -294,37 +267,12 @@ $(function(){
 	}
 	else if ($(this).parent().is('#inhFiles'))
 	{
-		// make previously clicked white, doesnt work
-		/*if(selectedForInh != name)
-		{
-			$(selectedForInh).css({"background-color": "white"});
-			alert(selectedForInh);
-		}*/
 		selectedForInh = name;
 		$(this).css({"background-color": "#ededed"});
 		
 		// process for SUPERCLASS
 		$("#superClass").empty();
 		$("#superClass").text("SuperClass for " + selectedForInh + ":");
-		//$("#superClass").append("SuperClass23:");
-		
-		//$("#superClass").append().load("source/" + name + ".js");
-		// load hangs the rest
-		//$.load("source/" + name + ".js"),function(data){	};
-		
-		//var superClassName = $(loadedFile).contents().find("prototype = new");
-		//var superClassName = $("loadedFile:contains('new')");
-		//var superClassName = $("loadedFile").find("prototype");
-		//var superClassName = loadedFile.find('prototype');
-		//$("#superClass").append("FOUND");
-		/*var index = 1;//loadedFile.text.indexOf("prototype");
-		if(index != -1) {
-			$("#superClass").append("FOUND");
-		}
-		else
-		{
-			$("#superClass").append("NOTFOUND");
-		}*/
 		
 		jQuery.get("source/" + name + ".js",function(data){
 		//alert(data);
@@ -377,9 +325,7 @@ $(function(){
 					//alert(emptySubClasses);
 					//var superClassName = data.slice(indexOfSuperClass+16,data.length-1);
 					//alert(className);
-				//$("#superClass").append("HI");
 					$("#subClass").append("<br />" + className);
-				//$("#superClass").append("HI2");
 				}
 
 			});
@@ -407,18 +353,4 @@ $(function(){
 		$(this).css({"background-color": "white"});
 	}
   });
-  
-  // might not be needed
-  $(".inhList").live('click', function() {
-    var name = $(this).text();
-	// try to toggle, doesnt load bc there is a next
-	//if($("[id^=srcViewCode]").parent().next().length == 0) {
-	// why not showing in correct element?
-	$("#superClass").load("source/" + name + ".js");
-  }).live('mouseover', function(){
-    $(this).css({"background-color": "#ededed"});
-  }).live("mouseout", function(){
-    $(this).css({"background-color": "white"});
-  });
-  
 });
