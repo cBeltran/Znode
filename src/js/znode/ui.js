@@ -92,15 +92,8 @@ $(function(){
 	inhWin.fadeOut();
 	compWin.fadeOut();
 	
-	//var glbList = $("#glbFiles");
-	//glbList.html("<div>loading...<\/div>");
-	//glbList.load("json/sourcefiles.php?"+Math.random()*1000000);
-	//glblWin.fadeIn();
-	//glblWin.fadeOut();
-	
 	var temp = $("#glbFiles .srcFile");
-	//var temp = $(".srcFile").parents("#glbFiles").text();
-	//var temp = $(".srcFile");
+
 	temp.siblings().each(function(){
 		// go into each file and search for globals
 		var name = $(this).text();
@@ -108,57 +101,32 @@ $(function(){
 		jQuery.get("MainMenu/" + name + ".js",function(data){
 			 var indexOfPotVar = new Array();
 			 indexOfPotVar[0] = 0;
-			 var count = 0;
-			 var prevCount = 0;
-			 var lengthMinusOne = 0;
 			 var indexOfFunction = data.indexOf("function");
-			 //var tempy = data.indexOf("var");
-			 //alert("var " + tempy);
-			 //alert("function = " + indexOfFunction);
+
 			do{
-				lengthMinusOne = indexOfPotVar.length - 1;
 				var length = indexOfPotVar.length;
-				//alert("array len = " +  lengthMinusOne);
 				//var indexStart = indexOfPotVar['length']+1;
 				var indexStart = indexOfPotVar.pop();
 				indexOfPotVar.push(indexStart);
 				indexStart++;
 				var tempIndexOfVar = data.indexOf("var",indexStart);
-				//alert("index start= " + indexStart);
-				//indexOfPotVar['count'] = tempIndexOfVar;
 				indexOfPotVar.push(tempIndexOfVar);
-				//prevCount = count;
-				count = count + 1;
-				//alert("var " + tempIndexOfVar);
-				//alert("var = " + indexOfPotVar[length]);
-				//alert("count = " + count);
+
 				if(tempIndexOfVar < indexOfFunction && tempIndexOfVar != -1)
 				{
 					// get index of equals
 					var indexEquals = data.indexOf("=",tempIndexOfVar);
 					var glbAtrName = data.slice(tempIndexOfVar+3,indexEquals-1);
-					//alert("add this elem to tree" + glbAtrName);
-					//$(this).after(glbAtrName);
-					//$("#glbFiles .srcFile").append(glbAtrName);
-					//$("#glbFiles .srcFile").append(function(){
+
 					$("#glbFiles .srcFile").each(function(){
 						var temps = $(this).text();
 						//var temps = $("#glbFiles .srcFile").text();
 						//alert(temps);
 						if (temps == name)
-						{
-							//alert(name);
-							//$(this).add(glbAtrName,document);
-							//$(this).append(glbAtrName);
-							//$(this).append(glbAtrName);
-							
+						{							
 							var cloned = $(this).clone().append(glbAtrName);
 							$(this).after(cloned);
 							
-							//$(this).attr('id',HELP);
-
-							//.append(glbAtrName);
-							//this.srcFile = this.srcFile.add(glbAtrName);
 						}
 						else
 						{
@@ -167,8 +135,6 @@ $(function(){
 						}
 
 					});
-					//jQuery(this).append(glbAtrName);
-					//name.append(glbAtrName);
 				}
 				// ELSE IF didnt find any globals
 				else if (tempIndexOfVar == -1)
@@ -183,10 +149,6 @@ $(function(){
 					});
 				}
 			}while(tempIndexOfVar != -1);
-			//var indexOfFunction = data.indexOf("function");
-			//var indexOfPotVar = data.indexOf("var");
-			//alert(indexOfFunction);
-			//alert(indexOfPotVar);
 		});
 	});
 	
@@ -275,20 +237,13 @@ $(function(){
 		$("#superClass").text("SuperClass for " + selectedForInh + ":");
 		
 		jQuery.get("MainMenu/" + name + ".js",function(data){
-		//alert(data);
-		//var superClassName = $('data:contains("prototype = new")');
-		//var superClassName = $(data).search(/prototype = new/);
-		//returns nothing
-		//var superClassName = $(data).find('prototype = new').text();
+
 		var indexOfSuperClass = data.indexOf("prototype = new");
 		//alert(indexOfSuperClass);
 		if(indexOfSuperClass > 0)
 		{
 			var superClassName = data.slice(indexOfSuperClass+16,data.length-1);
-			//alert(superClassName);
-		//$("#superClass").append("HI");
 			$("#superClass").append("<br />" + superClassName);
-		//$("#superClass").append("HI2");
 		}
 		else
 		{
@@ -302,11 +257,6 @@ $(function(){
 		$("#subClass").text("SubClasses for " + selectedForInh + ":");
 		var inhFileList =  $("#inhFiles");
 		
-		// show first text line SuperClass ...
-		//alert(inhFileList.next().text());
-		
-		// shows all siblings not including self
-		//alert($(this).siblings().text());
 		var emptySubClasses = 0;
 		var found = 0;
 		$(this).siblings().each(function(){
@@ -341,8 +291,10 @@ $(function(){
 		}
 		//alert(emptySubClasses);
 	}
+	
 		else if ($(this).parent().is('#glbFiles'))
 	{
+		// TODO handle the clicked event for globals
 		alert(name);
 	}
   }).live('mouseover', function(){
