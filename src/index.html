@@ -15,6 +15,26 @@
       <div id="fileTitle">Files:</div>
       <div id="files"></div>
     </div>
+	<div id="sourceWin">
+      <div id="fileTitle">SourceView:</div>
+      <div id="srcFiles"></div>
+	  <div id="srcViewCode1"></div>
+	  <div id="srcViewCode2"></div>
+    </div>
+	<div id="inhWin">
+      <div id="fileTitle">InheritanceView:</div>
+      <div id="inhFiles"></div>
+	  <div id="superClass"></div>
+	  <div id="subClass"></div>
+    </div>
+	<div id="compWin">
+      <div id="fileTitle">CompositionView:</div>
+      <div id="files"></div>
+    </div>
+	<div id="glblWin">
+      <div id="fileTitle">GlobalView:</div>
+      <div id="glbFiles"></div>
+    </div>
     <div id="overlay"></div>
     <div id="controls">
       <div id="logo" >Znode</div>
@@ -28,7 +48,14 @@
          <input type="text" name="filename" id="filename" spellcheck="false"/>
         </form>
       </div>
+	  <!--<a href="index.html">Znode</a>-->
+	  <div id="znodeV" class="btn">ClearView</div>
+	  <div id="sourceV" class="btn">SourceCode</div>
+      <div id="inheritanceV" class="btn">InheritanceTree</div>
+      <div id="compositionV" class="btn">Compositions</div>
+      <div id="globalV" class="btn">Globals</div>
     </div>
+	<!--<div id="lists"></div>-->
     <div id="canvas"></div>
   </body>
 </html>
